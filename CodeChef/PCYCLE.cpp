@@ -33,7 +33,6 @@ int main() {
 	    int current = permu[head];
 	    vector<int> cycle;
 	    cycle.push_back(head+1);
-	    int steps = 0;
 	    while(true){
 	        cycle.push_back(current);
 	        if(current-1 == head){
