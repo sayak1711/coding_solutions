@@ -6,12 +6,7 @@ def pprint_matrix(matrix):
     print('\n'.join(table))
 
 def generateMatrix(A):
-    B = []
-    for i in range(A):
-        C = []
-        for j in range(A):
-            C.append(0)
-        B.append(C)
+    B = [[0]*A for _ in range(A)]
     direction = 0
     l = 0
     r = A - 1
