@@ -5,9 +5,7 @@ def bubble_sort(arr):
         alteration = False
         while i < l-1:
             if arr[i] > arr[i+1]:
-                arr[i] = arr[i]+arr[i+1]
-                arr[i+1] = arr[i]-arr[i+1]
-                arr[i] = arr[i]-arr[i+1]
+                arr[i], arr[i+1] = arr[i+1], arr[i]
                 alteration = True
             i += 1
         if not alteration:
