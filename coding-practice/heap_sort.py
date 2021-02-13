@@ -28,6 +28,6 @@ def heap_sort(arr):
         arr[i], arr[0] = arr[0], arr[i]
         max_heapify(arr, 0, i)
 
-heap_sort(level_order1)
-print(level_order1)
+#heap_sort(level_order1)
+#print(level_order1)
     

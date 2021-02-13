@@ -32,7 +32,47 @@ def approach_heap(num):
         print(f'Median is {(max_heap[0]+min_heap[0])/2}')
     print()
 
+#for num in [41, 35, 62, 4, 97, 108]:
+#    approach_heap(num)
+
+from heap_sort import heap_sort
+import math
+
+container = []
+def approach_naive(num):
+    container.append(num)
+    heap_sort(container)
+    n = len(container)
+    if n % 2 == 0:
+        print((container[n//2]+container[n//2-1])/2)
+    else:
+        print(container[math.floor(n/2)])
+
+
+#for num in [41, 35, 62, 4, 97, 108]:
+#    approach_naive(num)
+
+from binary_search import bs_pos
+
+container = []
+def approach_binary_search(num):
+    n = len(container)
+    if n == 0:
+        container.append(num)
+    else:
+        pos = bs_pos(container, num)
+        container.append(0) # to increase length
+        n += 1
+        i = len(container)-2
+        while i >= pos:
+            container[i+1] = container[i]
+            i -= 1
+        container[pos] = num
+    print(num, container)
+    if n % 2 == 0:
+        print((container[n//2]+container[n//2-1])/2)
+    else:
+        print(container[math.floor(n/2)])
+
 for num in [41, 35, 62, 4, 97, 108]:
-    approach_heap(num)
-
-
+    approach_binary_search(num)
