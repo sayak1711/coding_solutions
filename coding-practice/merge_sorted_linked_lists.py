@@ -32,12 +32,12 @@ def approach_naive(list_of_ll):
     all_numbers.sort()
     return generate_linked_list(all_numbers)
 
-#lls = [[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]]
-#lls = [generate_linked_list(l) for l in lls]
-#print('Initial linked lists were:')
-#for l in lls:
-#    print_ll(l)
-#print()
+lls = [[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]]
+lls = [generate_linked_list(l) for l in lls]
+print('Initial linked lists were:')
+for l in lls:
+    print_ll(l)
+print()
 #print_ll(approach_naive(lls))
 
 # APPROACH 2: compare one by one by using many pointers
@@ -63,10 +63,26 @@ def approach_onebyone(list_of_ll):
         list_of_ll[smallest_idx] = list_of_ll[smallest_idx].next
     return generate_linked_list(all_numbers)
 
-lls = [[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]]
-lls = [generate_linked_list(l) for l in lls]
-print('Initial linked lists were:')
-for l in lls:
-    print_ll(l)
-print()
-print_ll(approach_onebyone(lls))
+#print_ll(approach_onebyone(lls))
+
+from queue import PriorityQueue
+# APPROACH 3: Use priority queue
+def approach_pq(list_of_ll):
+    head = cur = Node(0)  # both pointing to a dummy node
+    # take heads of all linked lists first just like previous approach
+    pq = PriorityQueue()
+    for ll in list_of_ll:
+        if ll:
+            pq.put((ll.val, ll))
+    # priority queue will order them according to value
+    
+    while not pq.empty():
+        val, node = pq.get()
+        cur.next = Node(val)
+        cur = cur.next
+        if node.next is not None:
+            pq.put((node.next.val, node.next))
+    return head.next
+
+head = approach_pq(lls)
+print_ll(head)
