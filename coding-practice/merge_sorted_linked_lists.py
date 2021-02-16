@@ -84,5 +84,56 @@ def approach_pq(list_of_ll):
             pq.put((node.next.val, node.next))
     return head.next
 
-head = approach_pq(lls)
+#head = approach_pq(lls)
+#print_ll(head)
+
+# APPROACH 4: Merge 2 at a time..so k-1 merges for k ll O(kN)
+def approach_twoatatime(list_of_ll):
+    cur = list_of_ll[0]
+    for i in range(1, len(list_of_ll)):
+        cur = merge_two_ll(cur, list_of_ll[i])
+    return cur
+
+def merge_two_ll(ll1, ll2):
+    cur = head = Node(0)  # dummy
+    while ll1 is not None and ll2 is not None:
+        if ll1.val < ll2.val:
+            cur.next = Node(ll1.val)
+            ll1 = ll1.next
+            cur = cur.next
+        else:
+            cur.next = Node(ll2.val)
+            ll2 = ll2.next
+            cur = cur.next
+    while ll1 is not None:
+        cur.next = Node(ll1.val)
+        ll1 = ll1.next
+        cur = cur.next
+    while ll2 is not None:
+        cur.next = Node(ll2.val)
+        ll2 = ll2.next
+        cur = cur.next
+    return head.next
+
+#head = approach_twoatatime(lls)
+#print_ll(head)
+
+# APPROACH 5:Same as before but merge pairs of 2 at first step...1 and 2...3 and 4...5 and 6
+# so now we have k/2 lls. then in next step again take pairs of 2 and so on
+# advantage is that we avoid having many repeated comparisons O(NlogK)
+def approach_merge_divide_and_conquer(list_of_ll):
+    previous_level = list_of_ll
+    while len(previous_level) > 1:
+        cur_level = []
+        i = 0
+        while i < len(previous_level)-1:
+            cur_level.append(merge_two_ll(previous_level[i], previous_level[i+1]))
+            i += 2
+        if i == len(previous_level)-1:
+            cur_level.append(previous_level[i])
+        previous_level = cur_level
+    return previous_level[0]
+head = approach_merge_divide_and_conquer(lls)
 print_ll(head)
+
+            
