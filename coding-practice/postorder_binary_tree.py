@@ -1,3 +1,4 @@
+from collections import defaultdict
 class Node:
     def __init__(self, val):
         self.val = val
@@ -18,24 +19,25 @@ root.right.right = Node(8)
 7       12   15     8
 '''
 
-def preorder_recursive(root):
+def postorder_recursive(root):
     if root:
+        postorder_recursive(root.left)
+        postorder_recursive(root.right)
         print(root.val)
-        preorder_recursive(root.left)
-        preorder_recursive(root.right)
 
-preorder_recursive(root)
+postorder_recursive(root)
 
-def preorder_iterative(root):
-    ans = []
+def postorder_iterative(root):
     stack = [root]
+    ans = []
     while stack:
         lifo = stack.pop()
         ans.append(str(lifo.val))
-        if lifo.right:
-            stack.append(lifo.right)
         if lifo.left:
             stack.append(lifo.left)
+        if lifo.right:
+            stack.append(lifo.right)
+    ans.reverse()
     print('-->'.join(ans))
 
-preorder_iterative(root)
+postorder_iterative(root)
