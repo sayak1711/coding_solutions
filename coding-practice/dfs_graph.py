@@ -14,9 +14,9 @@ class Graph:
             if not self.visited[neighbour]:
                 self.DFS(neighbour)
 
-    def DFSTraversal(self):
-        self.visited = [False]*len(self.graph)
-        for node in self.graph:
+    def DFSTraversal(self, nodes):
+        self.visited = [False]*len(nodes)
+        for node in nodes:
             if not self.visited[node]:
                 self.DFS(node)
 
@@ -30,4 +30,4 @@ g.addEdge(2, 0)
 g.addEdge(2, 3)
 g.addEdge(3, 3)
 print(g.graph)
-g.DFSTraversal()
+g.DFSTraversal(range(0, 4))
